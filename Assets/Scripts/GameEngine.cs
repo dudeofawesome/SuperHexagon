@@ -5,8 +5,9 @@ using Holoville.HOTween;
 
 public class GameEngine : MonoBehaviour {
 	[SerializeField] private GameObject player = null;
-	[SerializeField] public GameObject gameAudioMusic = null;
-	[SerializeField] public GameObject gameAudioOver = null;
+	[SerializeField] public GameObject audioMusic = null;
+	[SerializeField] public GameObject audioGameOver = null;
+	[SerializeField] public GameObject audioGameOverSound = null;
 	public static List<GameObject> hexagons = new List<GameObject>();
 	public float rotationVelocity = 10;
 	public static bool gameOver = true;
@@ -102,7 +103,7 @@ public class GameEngine : MonoBehaviour {
 
 			color--;
 			if (color < 0) {
-				color = 2550;
+				color = 3600;
 			}
 		}
 		else {
@@ -114,24 +115,28 @@ public class GameEngine : MonoBehaviour {
 						if (buttonSelected != Button.START){
 							buttonSelected = Button.START;
 							timeButtonSelected = 0;
+							GameObject.Find("Audio/ButtonHover").GetComponent<AudioSource>().Play();
 						}
 						timeButtonSelected++;
 						if (timeButtonSelected > timeToSelectButton) {
 							startGame();
 							timeButtonSelected = 0;
 							buttonSelected = Button.NONE;
+							GameObject.Find("Audio/ButtonPress").GetComponent<AudioSource>().Play();
 						}
 					}
 					else if (exitButton.center.Contains(new Vector2(cursorPosition, 273))){
 						if (buttonSelected != Button.EXIT){
 							buttonSelected = Button.EXIT;
 							timeButtonSelected = 0;
+							GameObject.Find("Audio/ButtonHover").GetComponent<AudioSource>().Play();
 						}
 						timeButtonSelected++;
 						if (timeButtonSelected > timeToSelectButton) {
 							Application.Quit();
 							timeButtonSelected = 0;
 							buttonSelected = Button.NONE;
+							GameObject.Find("Audio/ButtonPress").GetComponent<AudioSource>().Play();
 						}
 					}
 					else {
@@ -144,24 +149,28 @@ public class GameEngine : MonoBehaviour {
 						if (buttonSelected != Button.RESTART){
 							buttonSelected = Button.RESTART;
 							timeButtonSelected = 0;
+							GameObject.Find("Audio/ButtonHover").GetComponent<AudioSource>().Play();
 						}
 						timeButtonSelected++;
 						if (timeButtonSelected > timeToSelectButton) {
 							startGame();
 							timeButtonSelected = 0;
 							buttonSelected = Button.NONE;
+							GameObject.Find("Audio/ButtonPress").GetComponent<AudioSource>().Play();
 						}
 					}
 					else if (exitButton.center.Contains(new Vector2(cursorPosition, 273))){
 						if (buttonSelected != Button.BACK){
 							buttonSelected = Button.BACK;
 							timeButtonSelected = 0;
+							GameObject.Find("Audio/ButtonHover").GetComponent<AudioSource>().Play();
 						}
 						timeButtonSelected++;
 						if (timeButtonSelected > timeToSelectButton) {
 							menuPosition = MenuState.MAIN;
 							timeButtonSelected = 0;
 							buttonSelected = Button.NONE;
+							GameObject.Find("Audio/ButtonPress").GetComponent<AudioSource>().Play();
 						}
 					}
 					else {
@@ -196,6 +205,7 @@ public class GameEngine : MonoBehaviour {
 		}
 		hexagons.Clear();
 		player.GetComponent<CameraController>().ZoomOut();
+		GameObject.Find("Audio/Begin").GetComponent<AudioSource>().Play();
 		GameObject.Find("Audio/Music").GetComponent<AudioSource>().Play();
 		startTime = Time.time;
 	}

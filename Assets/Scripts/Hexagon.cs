@@ -58,8 +58,9 @@ public class Hexagon : MonoBehaviour {
 		}
 		else if (go.tag == "Player") {
 			GameObject.Find("Player/Triangle").GetComponent<MeshRenderer>().enabled = false;
-			GameObject.Find("Audio/Music").GetComponent<AudioManager>().fadeOut();
-			GameObject.Find("GameEngine").GetComponent<GameEngine>().gameAudioOver.GetComponent<AudioSource>().Play();
+			GameObject.Find("GameEngine").GetComponent<GameEngine>().audioMusic.GetComponent<AudioSource>().Stop();
+			GameObject.Find("GameEngine").GetComponent<GameEngine>().audioGameOver.GetComponent<AudioSource>().Play();
+			GameObject.Find("GameEngine").GetComponent<GameEngine>().audioGameOverSound.GetComponent<AudioSource>().Play();
 			GameEngine.gameOver = true;
 			GameEngine.endTime = Time.time;
 			GameEngine.menuPosition = GameEngine.MenuState.GAMEOVER;

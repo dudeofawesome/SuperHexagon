@@ -23,7 +23,7 @@ public class ChangeColor : MonoBehaviour {
 	void FixedUpdate () {
 		if (independent) {
 			c++;
-			if (c / 10 > 255) {
+			if (c / 10 > 360) {
 				c = 0;
 			}
 		}
