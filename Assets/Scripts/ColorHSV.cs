@@ -138,10 +138,7 @@ public class ColorHSV {
 		return color;
 	}
 
-	/**
-	* Format nicely
-	*/
-	public string ToString (){
+	public override string ToString (){
 		return string.Format("h: {0:0.00f}, s: {1:0.00f}, v: {2:0.00f}, a: {3:0.00f}", h, s, v, a);
 	}
 }

@@ -8,7 +8,10 @@ public class GameEngine : MonoBehaviour {
 	[SerializeField] public GameObject audioMusic = null;
 	[SerializeField] public GameObject audioGameOver = null;
 	[SerializeField] public GameObject audioGameOverSound = null;
+	[SerializeField] public GameObject cameraLeft = null;
+	[SerializeField] public GameObject cameraRight = null;
 	public static List<GameObject> hexagons = new List<GameObject>();
+	public static bool[] lastHexagon = new bool[7];
 	public float rotationVelocity = 10;
 	public static bool gameOver = true;
 	public static int color = 2100;
@@ -46,7 +49,7 @@ public class GameEngine : MonoBehaviour {
 	private dRect3D startButton = new dRect3D(new Rect(66, 260, 100, 55), new Rect(416, 260, 100, 55));
 	private dRect3D exitButton = new dRect3D(new Rect(285, 260, 100, 55), new Rect(634, 260, 100, 55));
 	private dRect3D restartButton = new dRect3D(new Rect(41, 260, 125, 55), new Rect(401, 260, 125, 55));
-	private dRect3D timeLabel = new dRect3D(new Rect(55, 80, 100, 55), new Rect(405, 80, 100, 55));
+	private dRect3D timeLabel = new dRect3D(new Rect(60, 80, 100, 55), new Rect(410, 80, 100, 55));
 	private dRect3D highScoreLabel = new dRect3D(new Rect(295, 80, 100, 55), new Rect(645, 80, 100, 55));
 	private int timeButtonSelected = 0;
 	private readonly int timeToSelectButton = 60;
@@ -70,8 +73,10 @@ public class GameEngine : MonoBehaviour {
 		hexagonFont.normal.textColor = Color.white;
 		leftAlign.alignment = TextAnchor.MiddleLeft;
 		leftAlign.normal.textColor = Color.white;
+		leftAlign.fontSize = 12;
 		rightAlign.alignment = TextAnchor.MiddleRight;
 		rightAlign.normal.textColor = Color.white;
+		rightAlign.fontSize = 12;
 	}
 	
 	// Update is called once per frame
@@ -205,6 +210,8 @@ public class GameEngine : MonoBehaviour {
 		}
 		hexagons.Clear();
 		player.GetComponent<CameraController>().ZoomOut();
+		player.GetComponent<CameraController>().pulse = true;
+		player.GetComponent<CameraController>().firstPulse = true;
 		GameObject.Find("Audio/Begin").GetComponent<AudioSource>().Play();
 		GameObject.Find("Audio/Music").GetComponent<AudioSource>().Play();
 		startTime = Time.time;

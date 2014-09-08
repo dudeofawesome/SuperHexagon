@@ -22,14 +22,17 @@ public class Hexagon : MonoBehaviour {
 			if (_distance > 0.9f && !use2ndSet)
 				transform.localScale = new Vector3(1, 0.977f + 0.232f * _distance, 1);
 			else{
-				// print(_distance);
-				// Time.timeScale = 0.1f;
 				use2ndSet = true;
 				if (_distance < 0.1f) {
 					goneNegative = true;
 				}
-				if (_distance > 0.6144f)
+				if (!goneNegative && ((_distance < 0.69 && _distance > 0.6) || (_distance < 0.4 && _distance > 0.3))) {
+					// print(_distance);
+					transform.localScale = new Vector3(1, 0.92f, 1);
+				}
+				else if (_distance > 0.6144f){
 					transform.localScale = new Vector3(1, -Mathf.Log(_distance + 0.1f) + 0.86f, 1);
+				}
 				else {
 					// transform.localScale = new Vector3(1, 1.14f, 1);
 					if (!goneNegative) {
