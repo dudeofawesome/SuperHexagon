@@ -46,11 +46,11 @@ public class GameEngine : MonoBehaviour {
 		EXIT
 	};
 	[SerializeField] private Button buttonSelected = Button.NONE;
-	private dRect3D startButton = new dRect3D(new Rect(66, 260, 100, 55), new Rect(416, 260, 100, 55));
-	private dRect3D exitButton = new dRect3D(new Rect(285, 260, 100, 55), new Rect(634, 260, 100, 55));
-	private dRect3D restartButton = new dRect3D(new Rect(41, 260, 125, 55), new Rect(401, 260, 125, 55));
-	private dRect3D timeLabel = new dRect3D(new Rect(60, 80, 100, 55), new Rect(410, 80, 100, 55));
-	private dRect3D highScoreLabel = new dRect3D(new Rect(295, 80, 100, 55), new Rect(645, 80, 100, 55));
+	private dRect3D startButton = new dRect3D(new Rect(416, 260, 100, 55), new Rect(66, 260, 100, 55));
+	private dRect3D exitButton = new dRect3D(new Rect(634, 260, 100, 55), new Rect(285, 260, 100, 55));
+	private dRect3D restartButton = new dRect3D(new Rect(401, 260, 125, 55), new Rect(41, 260, 125, 55));
+	private dRect3D timeLabel = new dRect3D(new Rect(410, 80, 100, 55), new Rect(60, 80, 100, 55));
+	private dRect3D highScoreLabel = new dRect3D(new Rect(645, 80, 100, 55), new Rect(295, 80, 100, 55));
 	private int timeButtonSelected = 0;
 	private readonly int timeToSelectButton = 60;
 	public int cursorPosition = 200;
@@ -88,8 +88,8 @@ public class GameEngine : MonoBehaviour {
 			// if (Input.GetKey(KeyCode.RightArrow)) {
 			// 	player.transform.Rotate(0, Time.deltaTime * rotationVelocity, 0);
 			// }
-
-			HOTween.To(player.transform, 1f, "localRotation", Quaternion.Euler(new Vector3(0, (Input.acceleration.x) * 450, 0)));
+			if (OpenDiveSensor.noGyroAccessible)
+				HOTween.To(player.transform, 1f, "localRotation", Quaternion.Euler(new Vector3(0, (Input.acceleration.x) * 450, 0)));
 			// player.transform.localRotation = Quaternion.Euler(new Vector3(0, (Input.acceleration.x) * 450, 0));
 		}
 		else {
@@ -204,7 +204,7 @@ public class GameEngine : MonoBehaviour {
 		menuPosition = MenuState.GAME;
 		gameOver = false;
 		// Application.LoadLevel("Game");
-		GameObject.Find("Player/Triangle").GetComponent<MeshRenderer>().enabled = true;
+		GameObject.Find("Player/Dive_Camera/Triangle").GetComponent<MeshRenderer>().enabled = true;
 		for (int i = 0; i < hexagons.Count; i++) {
 			Destroy(hexagons[i]);
 		}
