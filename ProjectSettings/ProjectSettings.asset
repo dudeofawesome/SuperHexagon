@@ -98,7 +98,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 1
   AndroidKeystoreName: /Users/DudeOfAwesome/Google Drive/keystores/SuperHexagon.keystore
-  AndroidKeyaliasName: 
+  AndroidKeyaliasName: release
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:
   - m_BuildTarget: 

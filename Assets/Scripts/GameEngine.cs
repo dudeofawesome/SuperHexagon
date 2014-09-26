@@ -18,6 +18,7 @@ public class GameEngine : MonoBehaviour {
 	public static float startTime = 0;
 	public static float endTime = 0;
 	private int fixedUpdateCount = 0;
+	public static int nextHex = 80;
 
 
 	[SerializeField] private GameObject prefabHexagon = null;
@@ -102,7 +103,8 @@ public class GameEngine : MonoBehaviour {
 	void FixedUpdate () {
 		if (!gameOver){
 			fixedUpdateCount++;
-			if (fixedUpdateCount % 80 == 0){
+			nextHex--;
+			if (nextHex < 0){
 				newHexagon();
 			}
 
@@ -189,15 +191,6 @@ public class GameEngine : MonoBehaviour {
 
 	void newHexagon () {
 		hexagons.Add((GameObject) Instantiate(prefabHexagon));
-		// hexagons[hexagons.Count - 1].GetComponent<Hexagon>().gameEngine = this;
-
-		// int i = (int)(Random.value * 5);
-		// print("hiding");
-		// hexagons[hexagons.Count - 1].transform.Find(i + "").gameObject.SetActive(false);
-		// if (!hexagons[hexagons.Count - 1].transform.Find(i + "").gameObject.active)
-		// 	print("hid");
-		// else
-		// 	print("failed to hide");
 	}
 
 	void startGame() {

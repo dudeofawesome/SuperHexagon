@@ -15,6 +15,7 @@ public class ParentHexagon : MonoBehaviour {
 						GameEngine.lastHexagon[j] = true;
 					GameEngine.lastHexagon[i] = false;
 					GameEngine.lastHexagon[6] = true;
+					GameEngine.nextHex = 80;
 					break;
 				case 3 : case 4 :
 					i = (int)(Random.value * 5);
@@ -23,6 +24,7 @@ public class ParentHexagon : MonoBehaviour {
 					if (i > 5)
 						i = i - 6;
 					transform.Find(i + "").gameObject.SetActive(false);
+					GameEngine.nextHex = 80;
 					break;
 				case 5 :
 					i = (int)(Random.value * 5);
@@ -31,6 +33,7 @@ public class ParentHexagon : MonoBehaviour {
 					if (i > 5)
 						i = i - 6;
 					transform.Find(i + "").gameObject.SetActive(false);
+					GameEngine.nextHex = 80;
 					break;
 				case 6 :
 					i = (int)(Random.value * 5);
@@ -43,6 +46,11 @@ public class ParentHexagon : MonoBehaviour {
 					if (i > 5)
 						i = i - 6;
 					transform.Find(i + "").gameObject.SetActive(false);
+					GameEngine.nextHex = 80;
+					break;
+				case 7 :
+
+					GameEngine.nextHex = 80;
 					break;
 			}
 		}
@@ -69,7 +77,10 @@ public class ParentHexagon : MonoBehaviour {
 			}
 			if (!setLast)
 				GameEngine.lastHexagon[6] = false;
+			GameEngine.nextHex = 80;
 		}
+
+		// GameEngine.nextHex = 80;
 	}
 	
 	// Update is called once per frame
