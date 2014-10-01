@@ -3,6 +3,7 @@ using System.Collections;
 using Holoville.HOTween;
 
 public class CameraController : MonoBehaviour {
+	[SerializeField] public OpenDiveSensor diveSensor = null;
 	[SerializeField] private GameObject cameraLeft = null;
 	[SerializeField] private GameObject cameraRight = null;
 	public bool pulse = true;
@@ -25,20 +26,16 @@ public class CameraController : MonoBehaviour {
 
 	void continuePulse () {
 		if (pulse) {
-			cameraLeft.camera.fieldOfView = 73f;
-			cameraRight.camera.fieldOfView = 73f;
-			HOTween.To(cameraLeft.camera, PULSE_RATE, new TweenParms().Prop("fieldOfView", 75f).OnComplete(continuePulse));
-			HOTween.To(cameraRight.camera, PULSE_RATE, new TweenParms().Prop("fieldOfView", 75f).OnComplete(continuePulse));
+			diveSensor.zoom = 0.09344f;
+			HOTween.To(diveSensor, PULSE_RATE, new TweenParms().Prop("zoom", 0.096f).OnComplete(continuePulse));
 		}
 	}
 
 	public void ZoomIn () {
-		HOTween.To(cameraLeft.camera, 0.5f, "fieldOfView", 43f);
-		HOTween.To(cameraRight.camera, 0.5f, "fieldOfView", 43f);
+		HOTween.To(diveSensor, 0.5f, "zoom", 0.05504f);
 	}
 
 	public void ZoomOut () {
-		HOTween.To(cameraLeft.camera, 0.5f, "fieldOfView", 75f);
-		HOTween.To(cameraRight.camera, 0.5f, "fieldOfView", 75f);
+		HOTween.To(diveSensor, 0.5f, "zoom", 0.096f);
 	}
 }

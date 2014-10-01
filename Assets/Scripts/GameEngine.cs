@@ -8,10 +8,12 @@ public class GameEngine : MonoBehaviour {
 	[SerializeField] public GameObject audioMusic = null;
 	[SerializeField] public GameObject audioGameOver = null;
 	[SerializeField] public GameObject audioGameOverSound = null;
+	[SerializeField] public OpenDiveSensor diveSensor = null;
 	[SerializeField] public GameObject cameraLeft = null;
 	[SerializeField] public GameObject cameraRight = null;
 	public static List<GameObject> hexagons = new List<GameObject>();
-	public static bool[] lastHexagon = new bool[7];
+	public static bool[] lastHexagon = new bool[6];
+	public static dPredefPattern predefPattern = new dPredefPattern();
 	public float rotationVelocity = 10;
 	public static bool gameOver = true;
 	public static int color = 2100;
@@ -19,6 +21,7 @@ public class GameEngine : MonoBehaviour {
 	public static float endTime = 0;
 	private int fixedUpdateCount = 0;
 	public static int nextHex = 80;
+	// @NOTE	5.32f is the magic number to merge them
 
 
 	[SerializeField] private GameObject prefabHexagon = null;
