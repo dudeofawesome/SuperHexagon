@@ -130,6 +130,7 @@ public class ParentHexagon : MonoBehaviour {
 
 	void Start () {
 		if (GameEngine.predefPattern.patternType == dPredefPattern.PatternType.TURN180) {
+			print("creating turn180");
 			bool setLast = false;
 			for (int i = 0; i < GameEngine.lastHexagon.Length - 1; i++) {
 				if (GameEngine.lastHexagon[i] == false) {
@@ -155,6 +156,7 @@ public class ParentHexagon : MonoBehaviour {
 			GameEngine.nextHex = 60;//80;
 		}
 		else if (GameEngine.predefPattern.patternType == dPredefPattern.PatternType.BACKANDFORTH) {
+			print("creating backandforth");
 			bool setLast = false;
 			for (int i = 0; i < 6; i++) {
 				transform.Find(i + "").GetComponent<Hexagon>().depth = 5.32f;
@@ -183,9 +185,11 @@ public class ParentHexagon : MonoBehaviour {
 			GameEngine.nextHex = 40;//80;
 		}
 		else if (GameEngine.predefPattern.patternType == dPredefPattern.PatternType.SPIRAL) {
+			print("creating spiral");
 
 		}
 		else {
+			print("creating other");
 			int i = 0;
 			switch ((int) (Random.value * 8)) {
 				case 0 : case 1 : case 2 :
@@ -248,7 +252,10 @@ public class ParentHexagon : MonoBehaviour {
 		// GameEngine.nextHex = 80;
 	}
 	
-
+	//turn180		111
+	//backandforth	
+	//spiral		
+	//other			
 
 
 
