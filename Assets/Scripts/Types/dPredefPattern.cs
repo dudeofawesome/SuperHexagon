@@ -38,6 +38,7 @@ public class dPredefPattern : MonoBehaviour {
 		else {
 			continuePattern = false;
 			lengthOfPattern = -1;
+			GameEngine.predefPattern.patternType = PatternType.NONE;
 		}
 	}
 }
