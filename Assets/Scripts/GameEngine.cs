@@ -22,6 +22,11 @@ public class GameEngine : MonoBehaviour {
 	private int fixedUpdateCount = 0;
 	public static int nextHex = 80;
 	// @NOTE	5.32f is the magic number to merge them
+	float dpi;
+	Vector2 screenInches = Vector2.zero;
+	Vector2 visibleScreenSizeInches = new Vector2(3.25f, 1.75f);
+	Rect visibleScreenInches = new Rect();
+	Rect visibleScreen = new Rect();
 
 
 	[SerializeField] private GameObject prefabHexagon = null;
@@ -63,6 +68,7 @@ public class GameEngine : MonoBehaviour {
 	private float originalWidth = 800;
 	private float originalHeight = 480;
 	private Vector3 scale;
+	private Vector3 translate;
 	Rect rect;
 	Vector2 pivot;
 
@@ -222,17 +228,38 @@ public class GameEngine : MonoBehaviour {
 
 	void OnGUI ()
 	{
+		if (dpi == 0)
+			dpi = (Screen.dpi > 0 && Screen.dpi < 2000) ? Screen.dpi : Screen.width / 4.1f;
+		if (screenInches == Vector2.zero)
+			screenInches = new Vector2(Screen.width / dpi, Screen.height / dpi);
+		if (visibleScreenInches == new Rect())
+			visibleScreenInches = new Rect((screenInches.x - visibleScreenSizeInches.x) / 2, (screenInches.y - visibleScreenSizeInches.y) / 2, visibleScreenSizeInches.x, visibleScreenSizeInches.y);
+		if (visibleScreen == new Rect())
+			visibleScreen = new Rect(visibleScreenInches.x * dpi, visibleScreenInches.y * dpi, visibleScreenInches.width * dpi, visibleScreenInches.height * dpi);
+
+		print(screenInches.x + " x " + screenInches.y + "\" : " + Screen.width + " x " + Screen.height);
+		print(visibleScreenInches.x + " x " + visibleScreenInches.y + " : " + visibleScreenInches.width + " x " + visibleScreenInches.height);
+		print(visibleScreen.x + " x " + visibleScreen.y + " : " + visibleScreen.width + " x " + visibleScreen.height);
+
+
+
+
+
+
 		GUI.skin = unselectedSkin;
 		
 		rect.Set(Screen.width / 2, 0, 1, Screen.height);
 		GUI.Box(rect, "");
 
-		scale.x = Screen.width / originalWidth; // calculate hor scale
-		scale.y = Screen.height / originalHeight; // calculate vert scale
+		scale.x = 1.61f; // /*Screen.width / visibleScreen.width*/ visibleScreen.width / Screen.width;
+		scale.y = 1.61f; // /*Screen.height / visibleScreen.height*/ visibleScreen.height / Screen.height;
 		scale.z = 1;
+		translate.x = visibleScreen.x;
+		translate.y = visibleScreen.y;
+		translate.z = 0;
 		var svMat = GUI.matrix; // save current matrix
 		// substitute matrix - only scale is altered from standard
-		GUI.matrix = Matrix4x4.TRS (Vector3.zero, Quaternion.identity, scale);
+		GUI.matrix = Matrix4x4.TRS (translate, Quaternion.identity, scale);
 
 		switch (menuPosition) {
 				
