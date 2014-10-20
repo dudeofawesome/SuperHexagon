@@ -80,7 +80,7 @@ public class OpenDiveSensor : MonoBehaviour {
 
 
 	[DllImport("divesensor")]	private static extern void initialize_sensors();
-	[DllImport("divesensor")]	private static extern int get_q(ref float q0,ref float q1,ref float q2,ref float q3);
+	[DllImport("divesensor")]	private  static extern int get_q(ref float q0,ref float q1,ref float q2,ref float q3);
 	[DllImport("divesensor")]	private static extern int get_m(ref float m0,ref float m1,ref float m2);
 	[DllImport("divesensor")]	private static extern int get_error();
 	[DllImport("divesensor")]   private static extern void dive_command(string command);

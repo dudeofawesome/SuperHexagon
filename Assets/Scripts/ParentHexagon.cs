@@ -93,6 +93,13 @@ public class ParentHexagon : MonoBehaviour {
 						GameEngine.predefPattern.patternType = dPredefPattern.PatternType.NONE;
 						GameEngine.lastHexagon[i] = false;
 					}
+
+					i++;
+					if (i > 5)
+						i = i - 6;
+					transform.Find(i + "").GetComponent<Hexagon>().depth = 0.1f;
+
+
 					GameEngine.predefPattern.increment();
 					disabledFace = true;
 					break;

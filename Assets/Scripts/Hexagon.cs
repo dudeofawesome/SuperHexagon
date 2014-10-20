@@ -89,7 +89,7 @@ public class Hexagon : MonoBehaviour {
 			GameObject.Find("GameEngine").GetComponent<GameEngine>().audioGameOverSound.GetComponent<AudioSource>().Play();
 			GameEngine.gameOver = true;
 			GameEngine.endTime = Time.time;
-			GameEngine.menuPosition = GameEngine.MenuState.GAMEOVER;
+			GameEngine.gui.switchToGameOver();
 			GameObject.Find("Player").GetComponent<CameraController>().ZoomIn();
 			if (Time.time - GameEngine.startTime > PlayerPrefs.GetFloat("HighScore"))
 				PlayerPrefs.SetFloat("HighScore", Mathf.Round((Time.time - GameEngine.startTime) * 100) / 100);
